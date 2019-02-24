@@ -1,62 +1,33 @@
-import { Selector } from 'testcafe';
+import HomePage from './models/home';
+import PostsPage from './models/posts';
+import ArticlePage from './models/article';
+import AddPage from './models/add';
+import ToastPage from './models/toast';
 
-fixture `Navigation`.page `http://localhost:3000`;
+const homePage = new HomePage();
+const postsPage = new PostsPage();
+const articlePage = new ArticlePage();
+const addPage = new AddPage();
+const toastPage = new ToastPage();
+
+fixture`Navigation`.page`http://localhost:3000`;
 
 test('Access to an article from the home page', async t => {
-  // WHEN (enter click on home page)
-  const startBtn = await Selector('a').nth(1);
-  await t.click(startBtn);
+  await t.click(homePage.startBtn);
+  await postsPage.isPageDisplayed();
 
-  // THEN (posts page elements verification)
-  await t.expect(await Selector('h4').innerText).eql('Posts Page');
-  const links = await Selector('ul').child('a');
-  await t.expect(await links.count).eql(100);
+  const text = await postsPage.clickFirstLink();
 
-  // WHEN (click on first article link)
-  const firstLink = await links.nth(0).child('div');
-  const firstLinkText = await firstLink.innerText; // save link value
-  await t.click(firstLink);
-
-  // THEN (article page)
-  const titleArticleEl = await Selector('h4');
-  const titleArticleText = await titleArticleEl.innerText;
-  await t.expect(titleArticleText).eql(firstLinkText);
+  await t.expect(await articlePage.title.innerText).eql(text);
 });
 
-test.only('Access to the form and posting an article, coming from home', async t => {
-  // WHEN (enter click on home page)
-  const startBtn = await Selector('a').nth(1);
-  await t.click(startBtn);
+test('Access to the form and posting an article, coming from home', async t => {
+  await t.click(homePage.startBtn);
+  await postsPage.isPageDisplayed();
 
-  // THEN (posts page elements verification)
-  await t.expect(await Selector('h4').innerText).eql('Posts Page');
-  const links = await Selector('ul').child('a');
-  await t.expect(await links.count).eql(100);
+  await t.click(await postsPage.addBtn);
 
-  // Check if a "plus button" exists
-  const addBtn = await Selector('button[aria-label=Add]');
-  await t.expect(addBtn.exists).ok();
-
-  // Click on the button
-  await t.click(addBtn);
-
-  // Check if we've navigated to the form page
-  const formEl = await Selector('form');
-  await t.expect(formEl.exists).ok();
-
-  // Enter a title
-  const inputTitle = await formEl.find('#field-title');
-  await t.typeText(inputTitle, 'How TestCafe is awesome!');
-
-  // Enter a content
-  const textAreaField = await formEl.find('#field-content');
-  await t.typeText(textAreaField, 'Bla Bli Blou');
-
-  // Submit the form
-  const submitBtn = await formEl.find('button');
-  await t.click(submitBtn);
-
-  // Check the success notification
-  const toastEl = await Selector('.Toastify').child('div');
-  await t.expect(toastEl.exists).ok();
+  await addPage.isPageDisplayed();
+  await addPage.submitForm('How TestCafe is awesome!', 'Bla Bli Blou');
+  await toastPage.isToastDisplayed();
 });
