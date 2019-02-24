@@ -1,0 +1,26 @@
+.AddPost {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+}
+
+.content {
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 1rem 0;
+
+  display: grid;
+  grid-auto-rows: min-content;
+  justify-items: center;
+  align-content: center;
+}
+
+.formContainer {
+  padding: 3rem;
+  min-width: 360px;
+}
+
+.form {
+  display: grid;
+}

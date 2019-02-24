@@ -1,0 +1,32 @@
+.Posts {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+}
+
+.content {
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.contentForLoader {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.loaderContainer {
+  text-align: center;
+}
+
+.headerContainer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}

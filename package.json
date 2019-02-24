@@ -1,0 +1,72 @@
+{
+  "name": "xke-introduction-testcafe",
+  "version": "1.0.0",
+  "description": "Introduction to TestCafe",
+  "homepage": "https://xke-introduction-testcafe.surge.sh",
+  "private": true,
+  "license": "MIT",
+  "dependencies": {
+    "@material-ui/core": "^3.9.2",
+    "@material-ui/icons": "^3.0.2",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.5",
+    "react-toastify": "^4.5.2",
+    "typeface-lato": "^0.0.54",
+    "typeface-oswald": "^0.0.54"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "coverage": "yarn test --coverage",
+    "eject": "react-scripts eject",
+    "predeploy": "yarn build",
+    "deploy": "mv build/index.html build/200.html && surge --project ./build && mv build/200.html build/index.html",
+    "analyze": "source-map-explorer build/static/js/main.*"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "codecov": "^3.2.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.9.1",
+    "react-test-renderer": "^16.8.2",
+    "serve": "^10.1.2",
+    "service-worker-mock": "^2.0.0",
+    "source-map-explorer": "^1.7.0",
+    "surge": "^0.20.1",
+    "husky": "^1.3.1",
+    "lint-staged": "^8.1.4",
+    "lodash": "^4.17.11",
+    "node-sass": "^4.11.0",
+    "prettier": "^1.16.4"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "<rootDir>/src/**/*.js",
+      "!<rootDir>/src/index.js",
+      "!<rootDir>/src/serviceWorker.js"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
+  }
+}
