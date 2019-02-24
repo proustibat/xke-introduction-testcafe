@@ -26,3 +26,5 @@ yarn-error.log*
 *.iml
 .idea
 .idea/vcs.xml
+
+artifacts
