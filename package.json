@@ -27,7 +27,7 @@
     "deploy": "mv build/index.html build/200.html && surge --project ./build && mv build/200.html build/index.html",
     "analyze": "source-map-explorer build/static/js/main.*",
     "serve:build": "serve -s build",
-    "e2e:ci": "testcafe chrome:headless e2e/*.js --app 'yarn serve:build'"
+    "e2e:ci": "testcafe chrome:headless e2e/*.js --app 'yarn serve:build' -r xunit:/tmp/test-results/res.xml"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -52,7 +52,8 @@
     "service-worker-mock": "^2.0.0",
     "source-map-explorer": "^1.7.0",
     "surge": "^0.20.1",
-    "testcafe": "^1.0.1"
+    "testcafe": "^1.0.1",
+    "testcafe-reporter-xunit": "^2.1.0"
   },
   "jest": {
     "collectCoverageFrom": [
