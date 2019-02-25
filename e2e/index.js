@@ -10,7 +10,7 @@ const articlePage = new ArticlePage();
 const addPage = new AddPage();
 const toastPage = new ToastPage();
 
-fixture`Navigation`.page`http://localhost:3000`.beforeEach(async t => {
+fixture`Navigation`.page`http://localhost:5000`.beforeEach(async t => {
   await t.click(homePage.startBtn);
   await postsPage.isPageDisplayed();
 });
