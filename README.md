@@ -1,5 +1,9 @@
 # xke-introduction-testcafe
 
+[![CircleCI](https://circleci.com/gh/proustibat/xke-introduction-testcafe/tree/master.svg?style=svg&circle-token=49a7ca92ed8ebbd224600c4c57b5718c12057102)](https://circleci.com/gh/proustibat/xke-introduction-testcafe/tree/master)
+[![Tested with TestCafe](https://img.shields.io/badge/tested%20with-TestCafe-2fa4cf.svg)](https://github.com/DevExpress/testcafe)
+
+
 ## Install
 
 ### `yarn install`
@@ -29,11 +33,29 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.
 
+## E2E tests
+
+End-to-end use [TestCafe](https://devexpress.github.io/testcafe/documentation).
+
+You can run it in different way, browsers, headless mode or not, etc (read the doc):
+
+```
+testcafe chrome:headless e2e/*.js --app 'yarn serve:build'
+testcafe remote e2e/*.js --app 'yarn serve:build' 
+testcafe remote e2e/*.js --app 'yarn serve:build' --qr-code
+...
+
+```
+
+## CircleCI
+
+On each push, build and tests are running. See the dashboard [here](https://circleci.com/gh/proustibat/xke-introduction-testcafe).
+
 ## Deploy
 
 ### `yarn deploy`
 
-It deploy the app with Surge on [xke-introduction-testcafe.surge.sh](https://xke-introduction-testcafe.surge.sh/). Note that you need to be logged. 
+It deploys the app with Surge on [xke-introduction-testcafe.surge.sh](https://xke-introduction-testcafe.surge.sh/). Note that you need to be logged. 
 You can deploy it on another domain by changing /public/CNAME content. 
 
 ## Prettier 
