@@ -1,0 +1,32 @@
+version: 2.0
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8-browsers
+    working_directory: /home/circleci/project
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      # Download and cache dependencies
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      # Build
+      - deploy:
+          name: Build
+          command: yarn build
+      # End-to-end tests
+      - run:
+          name: Run e2e tests
+          command: yarn e2e:ci
