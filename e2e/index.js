@@ -10,21 +10,18 @@ const articlePage = new ArticlePage();
 const addPage = new AddPage();
 const toastPage = new ToastPage();
 
-fixture`Navigation`.page`http://localhost:3000`;
-
-test('Access to an article from the home page', async t => {
+fixture`Navigation`.page`http://localhost:3000`.beforeEach(async t => {
   await t.click(homePage.startBtn);
   await postsPage.isPageDisplayed();
+});
 
+test('Access to an article from the home page', async t => {
   const text = await postsPage.clickFirstLink();
 
   await t.expect(await articlePage.title.innerText).eql(text);
 });
 
 test('Access to the form and posting an article, coming from home', async t => {
-  await t.click(homePage.startBtn);
-  await postsPage.isPageDisplayed();
-
   await t.click(await postsPage.addBtn);
 
   await addPage.isPageDisplayed();
