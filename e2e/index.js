@@ -1,4 +1,4 @@
-import { RequestLogger } from 'testcafe';
+import { RequestLogger, RequestMock } from 'testcafe';
 import HomePage from './models/home';
 import PostsPage from './models/posts';
 import ArticlePage from './models/article';
@@ -18,10 +18,42 @@ const logger = RequestLogger(
   { logResponseHeaders: true, logResponseBody: true }
 );
 
-fixture`Navigation`.page(url).beforeEach(async t => {
-  await t.click(homePage.startBtn);
-  await postsPage.isPageDisplayed();
-});
+// A URL to which Google Analytics sends data.
+const collectDataGoogleAnalyticsRegExp = new RegExp(
+  'https://www.google-analytics.com/r/collect'
+);
+
+// Technically, Google Analytics sends an XHR request for a GIF image.
+// So, we prepare a mocked response with binary data.
+const mockedResponse = Buffer.from([
+  0x47,
+  0x49,
+  0x46,
+  0x38,
+  0x39,
+  0x61,
+  0x01,
+  0x00,
+  0x01
+]);
+
+const mock = RequestMock()
+  .onRequestTo(collectDataGoogleAnalyticsRegExp)
+
+  // We respond to Analytics requests with the prepared data
+  // represented as a GIF image and change the status code to 202.
+  .respond(mockedResponse, 202, {
+    'content-length': mockedResponse.length,
+    'content-type': 'image/gif'
+  });
+
+fixture`Navigation`
+  .page(url)
+  .requestHooks(mock)
+  .beforeEach(async t => {
+    await t.click(homePage.startBtn);
+    await postsPage.isPageDisplayed();
+  });
 
 test('Access to an article from the home page', async t => {
   const text = await postsPage.clickFirstLink();
