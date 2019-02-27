@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactGA from 'react-ga';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
@@ -25,6 +26,11 @@ export class Posts extends Component {
     isLoading: false,
     posts: []
   };
+
+  constructor(props) {
+    super(props);
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }
 
   componentDidMount() {
     this.fetchPosts();
