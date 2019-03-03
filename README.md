@@ -3,7 +3,7 @@
 [![CircleCI](https://circleci.com/gh/proustibat/xke-introduction-testcafe/tree/master.svg?style=svg&circle-token=49a7ca92ed8ebbd224600c4c57b5718c12057102)](https://circleci.com/gh/proustibat/xke-introduction-testcafe/tree/master)
 [![Tested with TestCafe](https://img.shields.io/badge/tested%20with-TestCafe-2fa4cf.svg)](https://github.com/DevExpress/testcafe)
 
-This is the source code illustrating the "Introduction to TestCafe" presentation for the Xebians at the march's XKE day at [Xebia France](https://xebia.fr/). Slides are available [here](https://docs.google.com/presentation/d/1RQX2iJ-wKPxlOC_2lgj4VsgWODXRKGuUOwSVCfwk7vw/edit?usp=sharing). Each commit represents a step to learn how to use TestCafe.  
+This is the source code illustrating the "Introduction to TestCafe" presentation for the Xebians at the march's XKE day at [Xebia France](https://xebia.fr/). Slides are available [here](%5BXKE%5D%20-%20Introducing%20E2E%20testing%20with%20TestCafe.pdf). Each commit represents a step to learn how to use TestCafe.  
 
 ## Install
 
